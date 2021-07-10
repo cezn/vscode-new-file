@@ -1,0 +1,59 @@
+{
+  "name": "csharp-new-file",
+  "description": "Commands for adding csharp classes, interfaces and enums",
+  "version": "0.0.1",
+  "publisher": "cezn",
+  "repository": "https://github.com/cezn/vscode-csharp-new-file",
+  "engines": {
+    "vscode": "^1.32.0"
+  },
+  "activationEvents": [
+    "onLanguage:csharp",
+    "onCommand:cezn.csharp-new-file.newClass",
+    "onCommand:cezn.csharp-new-file.newInterface",
+    "onCommand:cezn.csharp-new-file.newEnum"
+  ],
+  "main": "./src/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "cezn.csharp-new-file.newClass",
+        "title": "C# New File: Class"
+      },
+      {
+        "command": "cezn.csharp-new-file.newInterface",
+        "title": "C# New File: Interface"
+      },
+      {
+        "command": "cezn.csharp-new-file.newEnum",
+        "title": "C# New File: Enum"
+      }
+    ],
+    "menus": {
+      "explorer/context": [
+        {
+          "command": "cezn.csharp-new-file.newClass"
+        },
+        {
+          "command": "cezn.csharp-new-file.newInterface"
+        },
+        {
+          "command": "cezn.csharp-new-file.newEnum"
+        }
+      ]
+    }
+  },
+  "scripts": {
+    "format:check": "prettier -c src/",
+    "format": "prettier -w src/"
+  },
+  "devDependencies": {
+    "@types/node": "^16.0.0",
+    "@types/vscode": "^1.32.0",
+    "prettier": "2.2.1"
+  },
+  "dependencies": {
+    "find-up": "^5.0.0",
+    "uuid": "^8.3.2"
+  }
+}
