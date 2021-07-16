@@ -4,7 +4,7 @@ const { promisify } = require("util");
 const fs = require("fs");
 const stat = promisify(fs.stat);
 
-async function getActivePath(folder) {
+async function getBaseDir(folder) {
   let newUri = folder;
 
   if (!folder) {
@@ -19,4 +19,4 @@ async function getActivePath(folder) {
 
   return (await stat(newUri.fsPath)).isDirectory() ? newUri.fsPath : path.dirname(newUri.fsPath);
 }
-exports.getActivePath = getActivePath;
+exports.getBaseDir = getBaseDir;

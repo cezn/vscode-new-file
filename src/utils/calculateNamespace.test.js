@@ -1,5 +1,5 @@
 const assert = require("assert");
-const { calculateNamespace } = require("./calculateNamespace");
+const { calculateNamespace } = require("./getNamespaceForFile");
 
 (async function calculates_namespace() {
   const result = await calculateNamespace("/home/user1/proj1/classes/NewClass1.cs", "/home/user1/proj1");

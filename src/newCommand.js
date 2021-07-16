@@ -5,25 +5,22 @@ const util = require("util");
 const exists = util.promisify(fs.exists);
 const mkdir = util.promisify(fs.mkdir);
 const writeFile = util.promisify(fs.writeFile);
-const { findCsprojDir } = require("./utils/findCsprojDir");
-const { getActivePath } = require("./utils/getActivePath");
-const { calculateNamespace } = require("./utils/calculateNamespace");
+const { getBaseDir } = require("./utils/getBaseDir");
+const { getNamespaceForFile } = require("./utils/getNamespaceForFile");
 const { renderTemplate } = require("./utils/renderTemplate");
 const { getUserSelection } = require("./utils/getUserSelection");
 
 /**
  *
  * @param {'class' | 'interface' | 'enum'} templateName
- * @param {vscode.Uri} fileUrl
+ * @param {vscode.Uri} baseUrl
  */
 
-async function newCommand(templateName, fileUrl) {
+async function newCommand(templateName, baseUrl) {
   const selectedPath = await getUserSelection(templateName);
   if (!selectedPath) return;
-  const activePath = await getActivePath(fileUrl);
-  const destinationPath = path.resolve(activePath, selectedPath);
-  const csprojDirPath = await findCsprojDir(activePath);
-  const namespace = calculateNamespace(destinationPath, csprojDirPath);
+  const destinationPath = path.resolve(await getBaseDir(baseUrl), selectedPath);
+  const namespace = await getNamespaceForFile(destinationPath);
 
   if (await exists(destinationPath)) {
     vscode.window.showWarningMessage("File already exists");

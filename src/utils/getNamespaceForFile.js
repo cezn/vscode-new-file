@@ -1,4 +1,5 @@
 const path = require("path");
+const { findCsprojDir } = require("./findCsprojDir");
 
 function trimPath(srcPath, segmentsToTrim) {
   if (segmentsToTrim == null) segmentsToTrim = "";
@@ -13,7 +14,14 @@ function normalizeNamespace(ns) {
     .replace(/^\.|\.$/g, "");
 }
 
+async function getNamespaceForFile(destinationPath) {
+  const csprojDirPath = await findCsprojDir(destinationPath);
+  return calculateNamespace(destinationPath, csprojDirPath);
+}
+
 function calculateNamespace(destinationPath, csprojDirPath) {
   return normalizeNamespace(trimPath(destinationPath, csprojDirPath));
 }
+
 exports.calculateNamespace = calculateNamespace;
+exports.getNamespaceForFile = getNamespaceForFile;
