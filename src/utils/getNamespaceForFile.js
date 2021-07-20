@@ -20,6 +20,7 @@ async function getNamespaceForFile(destinationPath) {
 }
 
 function calculateNamespace(destinationPath, csprojDirPath) {
+  // TODO: it returns '.' when destinationPath = csprojDirPath
   return normalizeNamespace(trimPath(destinationPath, csprojDirPath));
 }
 
