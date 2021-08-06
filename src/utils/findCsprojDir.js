@@ -5,8 +5,9 @@ const path = require("path");
 
 /**
  *
- * @param {string} activePath
- * @returns {Promise<string | undefined>} Directory path containng .csproj file
+ * @param {string} activePath Path from which to start search. If it doesn't exist on fs,
+ * this function traverses part paths.
+ * @returns {Promise<string | undefined>} Directory path containing .csproj file
  */
 async function findCsprojDir(activePath) {
   const cwd = await findExistingDir(activePath);
@@ -17,10 +18,10 @@ async function findCsprojDir(activePath) {
 }
 exports.findCsprojDir = findCsprojDir;
 
-async function findExistingDir(actisvePath) {
+async function findExistingDir(activePath) {
   // TODO: won't work on windows?
-  while (actisvePath !== "/") {
-    if (await exists(actisvePath)) return actisvePath;
-    actisvePath = path.dirname(actisvePath);
+  while (activePath !== "/") {
+    if (await exists(activePath)) return activePath;
+    activePath = path.dirname(activePath);
   }
 }

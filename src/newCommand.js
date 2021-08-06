@@ -6,7 +6,7 @@ const exists = util.promisify(fs.exists);
 const mkdir = util.promisify(fs.mkdir);
 const writeFile = util.promisify(fs.writeFile);
 const { getBaseDir } = require("./utils/getBaseDir");
-const { getNamespaceForFile } = require("./utils/getNamespaceForFile");
+const { getNamespaceForDir } = require("./utils/getNamespaceForDir");
 const { renderTemplate } = require("./utils/renderTemplate");
 const { getUserSelection } = require("./utils/getUserSelection");
 
@@ -20,7 +20,7 @@ async function newCommand(templateName, baseUrl) {
   const selectedPath = await getUserSelection(templateName);
   if (!selectedPath) return;
   const destinationPath = path.resolve(await getBaseDir(baseUrl), selectedPath);
-  const namespace = await getNamespaceForFile(destinationPath);
+  const namespace = await getNamespaceForDir(path.dirname(destinationPath));
 
   if (await exists(destinationPath)) {
     vscode.window.showWarningMessage("File already exists");
