@@ -19,14 +19,14 @@ const { getUserSelection } = require("./utils/getUserSelection");
 async function newCommand(templateName, baseUrl) {
   const selectedPath = await getUserSelection(templateName);
   if (!selectedPath) return;
-  const destinationPath = path.resolve(await getBaseDir(baseUrl), selectedPath);
-  const namespace = await getNamespaceForDir(path.dirname(destinationPath));
 
+  const destinationPath = path.resolve(await getBaseDir(baseUrl), selectedPath);
   if (await exists(destinationPath)) {
     vscode.window.showWarningMessage("File already exists");
     return;
   }
 
+  const namespace = await getNamespaceForDir(path.dirname(destinationPath));
   const [template, cursorIdx] = await renderTemplate({
     templateName,
     context: {
