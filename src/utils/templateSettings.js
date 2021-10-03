@@ -1,32 +1,32 @@
 exports.templatesSettings = {
   class: {
     prompt: "NewClass.cs",
-    template: ({ name, namespace, cursor }) => `namespace ${namespace}
+    template: ({ name, namespace, cursor }) => `namespace ${namespace};
+
+public class ${name}
 {
-  public class ${name}
-  {
-    ${cursor}
-  }
-}`,
+  ${cursor}
+}
+`,
   },
   interface: {
     prompt: "INewInterface.cs",
-    template: ({ name, namespace, cursor }) => `namespace ${namespace}
+    template: ({ name, namespace, cursor }) => `namespace ${namespace};
+
+public interface ${name}
 {
-  public interface ${name}
-  {
-    ${cursor}
-  }
-}`,
+  ${cursor}
+}
+`,
   },
   enum: {
     prompt: "NewEnum.cs",
-    template: ({ name, namespace, cursor }) => `namespace ${namespace}
+    template: ({ name, namespace, cursor }) => `namespace ${namespace};
+
+public enum ${name}
 {
-  public enum ${name}
-  {
-    ${cursor}
-  }
-}`,
+  ${cursor}
+}
+`,
   },
 };

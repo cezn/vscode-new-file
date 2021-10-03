@@ -18,15 +18,15 @@
     "commands": [
       {
         "command": "cezn.csharp-new-file.newClass",
-        "title": "C# New File: Class"
+        "title": "C# New: Class"
       },
       {
         "command": "cezn.csharp-new-file.newInterface",
-        "title": "C# New File: Interface"
+        "title": "C# New: Interface"
       },
       {
         "command": "cezn.csharp-new-file.newEnum",
-        "title": "C# New File: Enum"
+        "title": "C# New: Enum"
       }
     ],
     "menus": {
